@@ -1,12 +1,23 @@
+# This file describes the network interfaces available on your system
+# and how to activate them.
+
+source /etc/network/interfaces.d/*
+
+# Loopback
 auto lo
 iface lo inet loopback
 
-auto enp3s0
-iface enp3s0 inet manual
+# Fysieke NIC (geen IP)
+allow-hotplug enp2s0
+iface enp2s0 inet manual
 
+# Bridge
 auto br0
-iface br0 inet dhcp
-    bridge_ports enp3s0
+iface br0 inet static
+    address 192.30.177.8
+    netmask 255.255.255.0
+    gateway 192.30.177.100
+    bridge_ports enp2s0
     bridge_stp off
     bridge_fd 0
     bridge_maxwait 0
